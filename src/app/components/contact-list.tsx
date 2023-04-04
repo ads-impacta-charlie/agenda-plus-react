@@ -2,13 +2,18 @@
 
 import useSWR from 'swr';
 import {Contact} from "@/app/entity/contact";
+import CreateContactForm from "@/app/components/create-contact-form";
 
 // @ts-ignore
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function ContactList() {
-  const { data} = useSWR<Contact[]>('http://localhost:8080/contact', fetcher)
+  const { data, mutate} = useSWR<Contact[]>('http://localhost:8080/contact', fetcher)
   const contacts = data || []
+
+  const handleCreateContactFormSave = async (contact: Contact) => {
+    return mutate([...contacts, contact])
+  }
 
   return (<>
     {contacts.map(contact => (
@@ -21,5 +26,6 @@ export default function ContactList() {
         </ul>
       </div>
     ))}
+    <CreateContactForm onSave={handleCreateContactFormSave}></CreateContactForm>
   </>)
 }
