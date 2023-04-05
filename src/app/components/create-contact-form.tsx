@@ -2,7 +2,7 @@
 
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {ContactData} from "@/app/entity/contact-data";
 import CreateContactData from "@/app/components/create-contact-data";
 import {Button} from "@mui/material";
@@ -10,11 +10,17 @@ import {Contact} from "@/app/entity/contact";
 
 interface CreateContactFormParams {
   onSave: (contact: Contact) => void
+  contact?: Contact
 }
 
-export default function CreateContactForm({onSave}: CreateContactFormParams) {
-  const [name, setName] = useState<string>('')
-  const [data, setData] = useState<ContactData[]>([])
+export default function CreateContactForm({onSave, contact}: CreateContactFormParams) {
+  const [name, setName] = useState<string>(contact?.name || '')
+  const [data, setData] = useState<ContactData[]>(contact?.data || [])
+
+  useEffect(() => {
+    setName(contact?.name || '')
+    setData(contact?.data || [])
+  }, [contact])
 
   const handleAddDataClick = () => {
     setData(data => {
@@ -29,22 +35,26 @@ export default function CreateContactForm({onSave}: CreateContactFormParams) {
   }
 
   const handleSaveClick = () => {
-    const contact: Contact = { name, data }
+    const contactToSave: Contact = { name, data, uuid: contact?.uuid }
     const headers = new Headers()
     headers.set('accept', 'application/json')
     headers.set('content-type', 'application/json')
-    fetch('http://localhost:8080/contact', {
-      method: 'POST',
+    let url = 'http://localhost:8080/contact'
+    if (contact) {
+      url += `/${contact.uuid}`
+    }
+    fetch(url, {
+      method: contact ? 'PUT' : 'POST',
       cache: 'no-cache',
       mode: 'cors',
-      body: JSON.stringify(contact),
+      body: JSON.stringify(contactToSave),
       headers,
     }).then(response => response.json())
       .then(jsonResponse => onSave(jsonResponse))
   }
 
   return (<Box component="form" autoComplete="off">
-    <TextField required variant="outlined" label="Nome" defaultValue={name} onChange={e => setName(e.target.value)}></TextField>
+    <TextField required variant="outlined" label="Nome" value={name} onChange={e => setName(e.target.value)}></TextField>
     {data.map((d, i) => (
       <CreateContactData key={d.uuid} data={d} dataIndex={i} onChange={handleChangeContactData}></CreateContactData>
     ))}
