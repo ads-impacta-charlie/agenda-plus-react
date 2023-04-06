@@ -17,10 +17,12 @@ interface CreateContactFormParams {
 
 export default function CreateContactForm({onSave, contact}: CreateContactFormParams) {
   const [name, setName] = useState<string>(contact?.name || '')
+  const [avatarUrl, setAvatarUrl] = useState<string>(contact?.avatarUrl || '')
   const [data, setData] = useState<ContactData[]>(contact?.data || [])
 
   useEffect(() => {
     setName(contact?.name || '')
+    setAvatarUrl(contact?.avatarUrl || '')
     setData(contact?.data || [])
   }, [contact])
 
@@ -44,8 +46,11 @@ export default function CreateContactForm({onSave, contact}: CreateContactFormPa
   }
 
   const handleSaveClick = () => {
-
-    const contactToSave: Contact = { name, data: data.map(d => ({...d, uuid: undefined})), uuid: contact?.uuid }
+    let contactData = data
+    if (!(contact?.uuid)) {
+      contactData = data.map(d => ({...d, uuid: undefined}))
+    }
+    const contactToSave: Contact = { name, avatarUrl, data: contactData, uuid: contact?.uuid }
     const headers = new Headers()
     headers.set('accept', 'application/json')
     headers.set('content-type', 'application/json')
@@ -65,6 +70,7 @@ export default function CreateContactForm({onSave, contact}: CreateContactFormPa
 
   return (<Box component="form" autoComplete="off">
     <TextField required variant="outlined" label="Nome" value={name} onChange={e => setName(e.target.value)}></TextField>
+    <TextField variant="outlined" label="Avatar" value={avatarUrl} onChange={e => setAvatarUrl(e.target.value)}></TextField>
     {data.map((d, i) => (
       <Grid key={d.uuid} container spacing={2}>
         <Grid item xs={12} md={10}>
