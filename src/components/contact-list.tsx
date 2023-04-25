@@ -1,8 +1,8 @@
 'use client';
 
 import useSWR from 'swr';
-import {Contact} from "@/app/entity/contact";
-import CreateContactForm from "@/app/components/create-contact-form";
+import {Contact} from "@/entity/contact";
+import CreateContactForm from "@/components/create-contact-form";
 import {
   Avatar, Grid,
   IconButton,
@@ -18,9 +18,9 @@ import React, {useState} from "react";
 import {MoreHorizRounded} from "@mui/icons-material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import ContactTypeIcon from "@/app/components/contact-type-icon";
-import ContactCategoryIcon from "@/app/components/contact-category-icon";
-import ContactDataValue from "@/app/components/contact-data-value";
+import ContactTypeIcon from "@/components/contact-type-icon";
+import ContactCategoryIcon from "@/components/contact-category-icon";
+import ContactDataValue from "@/components/contact-data-value";
 
 // @ts-ignore
 const fetcher = (...args) => fetch(...args).then(res => res.json())

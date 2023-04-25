@@ -3,11 +3,11 @@
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import React, {useEffect, useState} from "react";
-import {ContactData} from "@/app/entity/contact-data";
-import CreateContactData from "@/app/components/create-contact-data";
+import {ContactData} from "@/entity/contact-data";
+import CreateContactData from "@/components/create-contact-data";
 import {Button, Grid} from "@mui/material";
-import {Contact} from "@/app/entity/contact";
-import CreateContactDataMenu from "@/app/components/create-contact-data-menu";
+import {Contact} from "@/entity/contact";
+import CreateContactDataMenu from "@/components/create-contact-data-menu";
 import {v4} from 'uuid';
 
 interface CreateContactFormParams {

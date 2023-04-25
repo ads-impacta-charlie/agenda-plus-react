@@ -1,4 +1,4 @@
-import AppHeader from "@/app/layout/app-header";
+import AppHeader from "@/layout/app-header";
 
 export const metadata = {
   title: 'Agenda+',

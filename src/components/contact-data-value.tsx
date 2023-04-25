@@ -1,4 +1,4 @@
-import {ContactData} from "@/app/entity/contact-data";
+import {ContactData} from "@/entity/contact-data";
 import {Link} from "@mui/material";
 
 export default function ContactDataValue({data}: {data: ContactData}) {
