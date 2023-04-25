@@ -1,8 +1,8 @@
-import {ContactData} from "@/app/entity/contact-data";
+import {ContactData} from "@/entity/contact-data";
 import TextField from "@mui/material/TextField";
 import {FormControl, Grid, InputLabel, MenuItem, Select} from "@mui/material";
-import ContactDataType from "@/app/entity/contact-data-type";
-import ContactDataCategory from "@/app/entity/contact-data-category";
+import ContactDataType from "@/entity/contact-data-type";
+import ContactDataCategory from "@/entity/contact-data-category";
 
 interface CreateContactDataParams {
   data: ContactData;
