@@ -1,18 +1,6 @@
-import AppHeader from "@/layout/app-header";
+import { AppProps } from 'next/app'
+import './index.css'
 
-export const metadata = {
-  title: 'Agenda+',
-  description: 'Agenda+',
-}
-
-export default function RootLayout({children}: {
-  children: React.ReactNode
-}) {
-  return (
-    <html lang="en">
-      <body>
-        <AppHeader>{children}</AppHeader>
-      </body>
-    </html>
-  )
+export default function MyApp({ Component, pageProps }:AppProps) {
+  return <Component {...pageProps} />
 }

@@ -1,15 +1,23 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import ContactList from "@/components/contact-list";
-import { Children } from 'react';
+import AppHeader from "@/layout/app-header";
+import ContactList from "@/components/ContactList";
+import Login from '@/components/Login/Login';
+import { useState } from "react";
 
-const inter = Inter({ subsets: ['latin'] })
+export default function Index() {
+  const [logedIn, setLogedIn] = useState(false)
 
-export default async function Home() {
   return (
-    <> 
-      <ContactList></ContactList>
-    </>
+    <html lang="en">
+      <body>
+        {logedIn 
+        ? <Login></Login> 
+        :(<div>
+            <AppHeader></AppHeader>
+            <ContactList></ContactList>
+          </div>
+         )
+        }
+      </body>
+    </html>
   )
 }
