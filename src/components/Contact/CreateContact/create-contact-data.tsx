@@ -11,6 +11,7 @@ interface CreateContactDataParams {
 }
 
 export default function CreateContactData({data, dataIndex, onChange}: CreateContactDataParams) {
+  
   const handleChangeType = (type: string) => {
     onChange({...data, type}, dataIndex)
   }
@@ -35,6 +36,7 @@ export default function CreateContactData({data, dataIndex, onChange}: CreateCon
           </Select>
         </FormControl>
       </Grid>
+
       <Grid item xs={6} md={3}>
         <FormControl fullWidth>
           <InputLabel id="data-category">Categoria</InputLabel>
@@ -45,6 +47,7 @@ export default function CreateContactData({data, dataIndex, onChange}: CreateCon
           </Select>
         </FormControl>
       </Grid>
+
       <Grid item xs={12} md={6}>
         <TextField fullWidth variant="outlined" label="Valor" defaultValue={data.value} onChange={e => handleChangeValue(e.target.value)}></TextField>
       </Grid>

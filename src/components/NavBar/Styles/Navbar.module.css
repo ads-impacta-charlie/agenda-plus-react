@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: #5d3b32;
+}
+.logoContainer {
+  display: flex;
+  align-items: center;
+  font-family: "Bungee", cursive;
+}
+.logo {
+  width: 50px;
+  height: 60px;
+  margin-right: 10px;
+}
+.logoFont {
+  font-family: inherit;
+  font-size: 26px;
+  color: #fff;
+}
+.search {
+  position: absolute;
+  width: 50vw;
+  border-radius: 10px;
+  height: 35px;
+  text-align: center;
+  font-size: 16px;
+  margin: 25%;
+}
+
+.iconsContainer {
+  display: flex;
+  align-items: center;
+}
+.home {
+  width: 45px;
+  height: 45px;
+  margin-right: 20px;
+  filter: invert(100%) sepia(0%) saturate(0) hue-rotate(346deg) brightness(100%)
+    contrast(100%);
+}
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0px 20px;
+}
