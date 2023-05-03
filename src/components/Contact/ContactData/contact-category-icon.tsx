@@ -1,6 +1,6 @@
+import React from "react";
 import {Icon} from "@mui/material";
 import {Business, Person} from "@mui/icons-material";
-import React from "react";
 
 export default function ContactCategoryIcon({category}: {category?: string}) {
   if (category === 'PERSONAL') {

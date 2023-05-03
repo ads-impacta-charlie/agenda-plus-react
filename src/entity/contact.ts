@@ -1,4 +1,4 @@
-import {ContactData} from "@/app/entity/contact-data";
+import {ContactData} from "@/entity/contact-data";
 
 export interface Contact {
   uuid?: string

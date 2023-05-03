@@ -1,4 +1,4 @@
-import {ContactData} from "@/app/entity/contact-data";
+import {ContactData} from "@/entity/contact-data";
 import {IconButton, Menu, MenuItem} from "@mui/material";
 import {MoreHorizRounded} from "@mui/icons-material";
 import React, {useState} from "react";
