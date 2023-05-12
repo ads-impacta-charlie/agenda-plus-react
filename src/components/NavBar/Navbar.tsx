@@ -23,7 +23,7 @@ export default function AppHeader() {
       <div className={styles.iconsContainer}>
         <div>
           <a href="#">
-            <Image src={home} alt="logo" className={styles.home} />
+            <Image src={home} alt="logo" className={styles.home}/>
           </a>
         </div>
         <div>

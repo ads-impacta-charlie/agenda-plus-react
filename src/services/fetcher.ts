@@ -11,12 +11,11 @@ export const fetcher = async (url: string, options: RequestInit = {}): Promise<a
     ...options,
     headers,
   }).then((res) => {
-    if(res.status === 401){
-        return
-    }else if(res.status !== 204){
-        return res.json()
+    if (res.status === 401) {
+      return
+    } else if (res.status !== 204) {
+      return res.json()
     }
     return res
-});
-    
+  });
 };
