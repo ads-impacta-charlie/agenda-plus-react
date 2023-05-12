@@ -1,23 +1,20 @@
 import { AppProps } from "next/app";
-
-import { getAuth } from "firebase/auth";
-
-import { FirebaseAppProvider, AuthProvider } from "reactfire";
-
-import firebase_app from "firebaseConfig";
+import { useEffect, useState } from 'react';
+import { auth } from "@/lib/firebaseConfig";
+import { User } from 'firebase/auth';
 
 import "./index.css";
 
-export default function MyApp(props: AppProps) {
-  const { Component, pageProps } = props;
+export default function MyApp({ Component, pageProps }: AppProps) {
+  const [user, setUser] = useState<User | null>(null);
 
-  const auth = getAuth(firebase_app);
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
 
-  return (
-    <FirebaseAppProvider firebaseApp={firebase_app}>
-      <AuthProvider sdk={auth}>
-        <Component {...pageProps} />
-      </AuthProvider>
-    </FirebaseAppProvider>
-  );
+    return () => unsubscribe();
+  }, []);
+
+  return <Component {...pageProps} user={user} />;
 }

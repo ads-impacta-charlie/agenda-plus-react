@@ -1,9 +1,7 @@
-let token = "";
-export function createToken(e: string) {
-  token = e;
-  console.log("token:", token);
-}
-export const fetcher = (url: string, options: RequestInit = {}): Promise<any> => {
+import { getUserToken } from "@/services/authService";
+
+export const fetcher = async (url: string, options: RequestInit = {}): Promise<any> => {
+  const token = await getUserToken();
   const headers = new Headers();
   headers.set("content-type", "application/json");
   headers.set("accept", "application/json");
@@ -13,12 +11,11 @@ export const fetcher = (url: string, options: RequestInit = {}): Promise<any> =>
     ...options,
     headers,
   }).then((res) => {
-    if(res.status === 401){
-        return
-    }else if(res.status !== 204){
-        return res.json()
+    if (res.status === 401) {
+      return
+    } else if (res.status !== 204) {
+      return res.json()
     }
     return res
-});
-    
+  });
 };
