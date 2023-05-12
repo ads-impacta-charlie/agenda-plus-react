@@ -2,11 +2,17 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./Styles/Navbar.module.css";
-
+import { signOutUser } from "@/services/authService";
 import logo from "@/Assets/Logo2.svg";
 import home from "@/Assets/home.svg";
 
 export default function AppHeader() {
+
+  const handleLogout = () => {
+    signOutUser()
+  };
+
+  
   return (
     <nav className={styles.container}>
       <div className={styles.logoContainer}>
@@ -21,7 +27,7 @@ export default function AppHeader() {
           </a>
         </div>
         <div>
-          <button className={styles.avatar}></button>
+          <button className={styles.avatar} onClick={handleLogout}></button>
         </div>
       </div>
     </nav>

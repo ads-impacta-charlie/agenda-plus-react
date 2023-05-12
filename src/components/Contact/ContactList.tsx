@@ -20,14 +20,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import ContactTypeIcon from "@/components/Contact/ContactData/contact-type-icon";
 import ContactCategoryIcon from "@/components/Contact/ContactData/contact-category-icon";
 import ContactDataValue from "@/components/Contact/ContactData/contact-data-value";
-import { getAuth } from "firebase/auth";
-import firebase_app from "firebaseConfig";
 import { fetcher } from "@/services/fetcher";
 
-const auth = getAuth(firebase_app);
-
 // @ts-ignore
-
 export default function ContactList() {
   const { data, mutate } = useSWR<Contact[]>(
     "http://localhost:8080/contact",

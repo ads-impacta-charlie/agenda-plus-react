@@ -17,7 +17,6 @@ export default function RootLayout({ children }: props) {
       <body>
         <Main />
         <NextScript />
-        <AuthContextProvider>{children}</AuthContextProvider>
       </body>
     </Html>
   );

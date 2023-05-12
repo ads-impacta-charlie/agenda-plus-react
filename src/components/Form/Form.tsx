@@ -11,6 +11,8 @@ interface props {
   setPassword: React.Dispatch<React.SetStateAction<string>>;
   btn: string;
   register: boolean;
+  onFail?: boolean;
+  errorMessage?: string;
 }
 
 const Form: React.FC<props> = ({
@@ -19,6 +21,8 @@ const Form: React.FC<props> = ({
   setPassword,
   btn,
   register,
+  onFail,
+  errorMessage
 }) => {
   return (
     <div className={styles.box}>
@@ -34,7 +38,7 @@ const Form: React.FC<props> = ({
         <form onSubmit={handleSubmitProp}>
           <input
             className={`${styles.input} ${styles.inputUser} `}
-            type="text"
+            type="email"
             placeholder="Usuário"
             onChange={(e) => setEmail(e.target.value)}
           ></input>
@@ -45,7 +49,13 @@ const Form: React.FC<props> = ({
             placeholder="Senha"
             onChange={(e) => setPassword(e.target.value)}
           ></input>
-
+          {
+            onFail ? (
+              <p style={{ color: "#990000", WebkitTextStrokeColor: "white" }}>{errorMessage}</p>
+            ) : (
+              <></>
+            )
+          }
           <button
             className={`${styles.input} ${styles.btn}`}
             type="submit"
