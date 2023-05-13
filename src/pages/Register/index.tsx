@@ -17,24 +17,17 @@ export default function Register() {
     try {
       await signUp(email, password);
       return router.push("/Home");
-
     } catch (error: any) {
       //@ts-ignore
-      const errorDescription: string = Object.values(error)[0]
+      const errorDescription: string = Object.values(error)[0];
 
       if (errorDescription.includes("weak-password")) {
         setErrorMessage("A senha deve conter mais de 6 dígitos.");
-      }
-
-      else if (errorDescription.includes("email-already-in-use")) {
+      } else if (errorDescription.includes("email-already-in-use")) {
         setErrorMessage("O e-mail já está cadastrado.");
-      }
-
-      else if (errorDescription.includes("invalid-email")) {
+      } else if (errorDescription.includes("invalid-email")) {
         setErrorMessage("E-mail inválido.");
-      }
-
-      else {
+      } else {
         setErrorMessage(errorDescription);
       }
 

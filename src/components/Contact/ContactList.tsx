@@ -26,7 +26,7 @@ import { fetcher } from "@/services/fetcher";
 export default function ContactList() {
   const { data, mutate } = useSWR<Contact[]>(
     "http://localhost:8080/contact",
-    fetcher
+    fetcher,
   );
   const contacts = data || [];
   const [contactToEdit, setContactToEdit] = useState<Contact>();
@@ -47,7 +47,7 @@ export default function ContactList() {
 
   const handleDataMenuClick = (
     event: React.MouseEvent<HTMLButtonElement>,
-    contact: Contact
+    contact: Contact,
   ) => {
     setContactMenu(contact);
     setActionMenuAnchorEl(event.currentTarget);

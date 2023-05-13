@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app"
+import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
@@ -8,7 +8,7 @@ const firebaseConfig = {
   storageBucket: "agenda-plus-cc653.appspot.com",
   messagingSenderId: "930578624004",
   appId: "1:930578624004:web:dc8422fc20f71648ab0f51",
-  measurementId: "G-F497WTTMYN"
+  measurementId: "G-F497WTTMYN",
 };
 
 const app = initializeApp(firebaseConfig);
