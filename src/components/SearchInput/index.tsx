@@ -8,10 +8,10 @@ interface SearchInputProps {
 export function SearchInput({ onSearch }: SearchInputProps) {
   return (
     <input
-    type="text"
-    className={styles.search}
-    placeholder="Buscar"
-    onChange={onSearch}
+      type="text"
+      className={styles.search}
+      placeholder="Buscar"
+      onChange={onSearch}
     />
   );
 }
