@@ -20,8 +20,6 @@ export default function Login() {
 
     try {
       await signIn(email, password);
-      router.push("/Home");
-
     } catch (error) {
       alert("Email ou Senha incorretos");
     }

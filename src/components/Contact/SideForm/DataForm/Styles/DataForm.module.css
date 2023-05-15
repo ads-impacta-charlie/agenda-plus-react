@@ -1,0 +1,21 @@
+.container {
+  width: 16vw;
+  margin: 0 10px;
+  border-bottom: 1px solid #fff;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 7%;
+}
+
+.container select {
+  height: 30px;
+  border-radius: 5px;
+}
+
+.container input {
+  height: 30px;
+  border: none;
+  flex: 1;
+  margin-left: 15px;
+  margin-right: 10px;
+}

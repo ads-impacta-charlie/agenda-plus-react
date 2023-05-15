@@ -1,6 +1,6 @@
 const ContactDataType: { [key: string]: string } = {
-  'TELEPHONE': "TELEFONE",
-  'EMAIL': "EMAIL",
+  'TELEPHONE': "Telefone",
+  'EMAIL': "Email",
 }
 
 export default ContactDataType

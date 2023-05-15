@@ -13,7 +13,9 @@ export default function RootLayout({ children }: props) {
         <head /> will contain the components returned by the nearest parent
         head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
-      <Head />
+      <Head>
+        <link rel="shortcut icon" href="@/Assets/Logo.svg" />
+      </Head>
       <body>
         <Main />
         <NextScript />

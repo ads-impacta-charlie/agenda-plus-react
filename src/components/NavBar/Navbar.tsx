@@ -7,12 +7,10 @@ import logo from "@/Assets/Logo2.svg";
 import home from "@/Assets/home.svg";
 
 export default function AppHeader() {
-
   const handleLogout = () => {
-    signOutUser()
+    signOutUser();
   };
 
-  
   return (
     <nav className={styles.container}>
       <div className={styles.logoContainer}>
@@ -23,7 +21,7 @@ export default function AppHeader() {
       <div className={styles.iconsContainer}>
         <div>
           <a href="#">
-            <Image src={home} alt="logo" className={styles.home}/>
+            <Image src={home} alt="logo" className={styles.home} />
           </a>
         </div>
         <div>
