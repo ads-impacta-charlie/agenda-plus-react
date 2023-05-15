@@ -45,10 +45,8 @@ export const signOutUser = async () => {
 export const checkUserLoggedIn = () => {
   auth.onAuthStateChanged((user) => {
     if (user != null) {
-      console.log(`O maluco já ta logado: ${user.email}`);
       router.push("/Home");
     } else {
-      console.log("Não ta logado não..");
     }
   });
 };
