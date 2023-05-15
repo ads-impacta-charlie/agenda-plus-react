@@ -1,0 +1,48 @@
+.img {
+  min-height: 30px;
+  min-width: 30px;
+  max-height: 150px;
+  max-width: 150px;
+  border-radius: 50%;
+  margin: 30px;
+  margin-top: 15%;
+  cursor: pointer;
+}
+.container {
+  position: absolute;
+  background-color: rgb(52, 51, 51);
+  opacity: 0.8;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal {
+  z-index: 5;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  width: max(20vw, 350px);
+  height: max(20vh, 250px);
+  background-color: #5d3b32;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.modal p {
+  margin-top: 3%;
+}
+.modal input[type="text"] {
+  margin-top: 30px;
+}
+
+.modal input[type="button"] {
+  width: max(30%, 100px);
+  margin-bottom: 0;
+}

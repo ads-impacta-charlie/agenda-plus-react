@@ -29,12 +29,17 @@ const Form: React.FC<props> = ({
       <div className={styles.container}>
         {register ? (
           <Link href={"./"}>
-            <Image src={back} alt="back" className={styles.backspace} />
+            <Image
+              src={back}
+              alt="back"
+              className={styles.backspace}
+              priority={false}
+            />
           </Link>
         ) : (
           <></>
         )}
-        <Image src={logo} alt="logo" className={styles.logo} />
+        <Image src={logo} alt="logo" className={styles.logo} priority={false} />
         <form onSubmit={handleSubmitProp}>
           <input
             className={`${styles.input} ${styles.inputUser} `}

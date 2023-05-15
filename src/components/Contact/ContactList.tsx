@@ -1,26 +1,21 @@
+/* eslint-disable @next/next/no-img-element */
 import useSWR from "swr";
-import { Contact } from "@/entity/contact";
-import CreateContactForm from "@/components/Contact/CreateContact/create-contact-form";
-import {
-  Avatar,
-  Grid,
-  IconButton,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-} from "@mui/material";
 import React, { useState } from "react";
-import { MoreHorizRounded } from "@mui/icons-material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import ContactTypeIcon from "@/components/Contact/ContactData/contact-type-icon";
-import ContactCategoryIcon from "@/components/Contact/ContactData/contact-category-icon";
-import ContactDataValue from "@/components/Contact/ContactData/contact-data-value";
+import Image from "next/image";
+
+import sideBarItens from "@/entity/side-bar-itens";
+import { Contact } from "@/entity/contact";
 import { fetcher } from "@/services/fetcher";
+
+import SideForm from "./SideForm/SideForm";
+import PlusBtn from "./PlusBtn/PlusBtn";
+import ContactCategoryIcon from "./ContactData/contact-category-icon";
+import ContactTypeIcon from "./ContactData/contact-type-icon";
+
+import styles from "./Styles/Contact.module.css";
+import edit from "@/Assets/editar.svg";
+import del from "@/Assets/lixeira.svg";
+import userIcon from "@/Assets/userIcon2.svg";
 
 interface ContactListProps {
   searchTerm: string;
@@ -39,38 +34,22 @@ export default function ContactList({ searchTerm }: ContactListProps) {
       : data.filter((c) => c.name.includes(searchTerm));
   const [contactToEdit, setContactToEdit] = useState<Contact>();
   const [contactMenu, setContactMenu] = useState<Contact>();
-  const [actionMenuAnchorEl, setActionMenuAnchorEl] =
-    useState<null | HTMLElement>(null);
-  const open = Boolean(contactMenu);
+  const [sideBar, setSideBar] = useState(false);
 
-  const handleCreateContactFormSave = async (contact: Contact) => {
-    setContactToEdit(undefined);
-    return mutate([...contacts, contact]);
+  const handleEventHover = (event: any, contact: Contact) => {
+    console.log(contact);
+    setContactMenu(contact);
   };
 
   const handleEditContact = (contact: Contact) => {
-    handleDataMenuClose();
+    setSideBar(true);
+    console.log(contact);
     setContactToEdit(contact);
   };
 
-  const handleDataMenuClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-    contact: Contact
-  ) => {
-    setContactMenu(contact);
-    setActionMenuAnchorEl(event.currentTarget);
-  };
-
-  const handleDataMenuClose = () => {
-    setContactMenu(undefined);
-    setActionMenuAnchorEl(null);
-  };
-
   const handleDeleteContact = async (contact: Contact) => {
-    handleDataMenuClose();
-
     if (!contact || !contact.uuid) {
-      return;
+      return console.log("não acho");
     }
 
     const headers = new Headers();
@@ -86,74 +65,129 @@ export default function ContactList({ searchTerm }: ContactListProps) {
     return mutate(contacts.filter((c) => c.uuid !== contact.uuid));
   };
 
-  return (
-    <>
-      <List>
-        {contacts.map((contact) => (
-          <ListItem
-            key={contact.uuid}
-            alignItems="flex-start"
-            secondaryAction={
-              <IconButton onClick={(e) => handleDataMenuClick(e, contact)}>
-                <MoreHorizRounded />
-              </IconButton>
-            }
-          >
-            <ListItemAvatar>
-              <Avatar alt={contact.name} src={contact.avatarUrl} />
-            </ListItemAvatar>
-            <ListItemText
-              primary={contact.name}
-              primaryTypographyProps={{ fontWeight: "bold" }}
-              secondary={
-                <>
-                  {contact.data.map((data) => (
-                    <Grid
-                      container
-                      key={data.uuid}
-                      spacing={0.5}
-                      alignItems="center"
-                    >
-                      <Grid item xs="auto">
-                        <ContactTypeIcon type={data.type} />
-                      </Grid>
-                      <Grid item xs="auto">
-                        <ContactCategoryIcon category={data.category} />
-                      </Grid>
-                      <Grid item xs>
-                        <ContactDataValue data={data} />
-                      </Grid>
-                    </Grid>
-                  ))}
-                </>
-              }
-            />
-          </ListItem>
-        ))}
-      </List>
+  //joga pro banco
+  const handleSaveBtn = async (contact: Contact) => {
+    setContactToEdit(undefined);
+    return mutate([...contacts, contact]);
+  };
 
-      <CreateContactForm
-        onSave={handleCreateContactFormSave}
-        contact={contactToEdit}
-      ></CreateContactForm>
-      <Menu
-        open={open}
-        anchorEl={actionMenuAnchorEl}
-        onClose={handleDataMenuClose}
-      >
-        <MenuItem onClick={() => handleEditContact(contactMenu!)}>
-          <ListItemIcon>
-            <EditIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Editar</ListItemText>
-        </MenuItem>
-        <MenuItem onClick={() => handleDeleteContact(contactMenu!)}>
-          <ListItemIcon>
-            <DeleteIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Excluir</ListItemText>
-        </MenuItem>
-      </Menu>
-    </>
+  return (
+    <div
+      className={
+        !sideBar ? styles.containerWithoutForm : styles.containerWithForm
+      }
+    >
+      {/*Sidebar */}
+      <div className={!sideBar ? styles.sideBar : styles.noSideBar}>
+        <ul>
+          {Object.keys(sideBarItens.menu1).map((item) => {
+            return <li key={item}>{item}</li>;
+          })}
+        </ul>
+      </div>
+
+      {/*Listagem */}
+      <div>
+        <ul className={styles.wrapper}>
+          <li className={styles.headerLi}>
+            <div></div>
+            <div>Nome</div>
+            <div>Email | Número</div>
+            <div>Tipo</div>
+          </li>
+          {contacts.map((contact) => {
+            return (
+              <div key={contact.uuid}>
+                <li
+                  onMouseEnter={(e) => handleEventHover(e, contact)}
+                  className={styles.listAllContacts}
+                >
+                  {/*1 */}
+                  <div className={styles.avatarContainer}>
+                    <div>
+                      {contact.avatarUrl ? (
+                        <img
+                          src={contact.avatarUrl}
+                          alt="avatar icon"
+                          className={styles.imageIcon}
+                        />
+                      ) : (
+                        <Image
+                          src={userIcon}
+                          alt="avatar icon"
+                          className={styles.imageIcon}
+                        />
+                      )}
+                    </div>
+                  </div>
+
+                  {/*2*/}
+                  <div className={styles.contactName}>{contact.name}</div>
+
+                  {/*3*/}
+                  <div className={styles.containerValues}>
+                    {contact.data.map((contactData) => {
+                      return (
+                        <>
+                          <div>
+                            <ContactTypeIcon type={contactData.type} />
+                            <p>{contactData.value}</p>
+                          </div>
+                        </>
+                      );
+                    })}
+                  </div>
+                  <div className={styles.containerValues}>
+                    {contact.data.map((contactData) => {
+                      return (
+                        <>
+                          <div>
+                            <ContactCategoryIcon
+                              category={contactData.category}
+                            />
+                            <p>{contactData.category}</p>
+                          </div>
+                        </>
+                      );
+                    })}
+                  </div>
+                  <div
+                    style={{
+                      gridArea: "icon",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Image
+                      src={edit}
+                      alt="edit icon"
+                      onClick={() => handleEditContact(contactMenu!)}
+                    />
+                    <Image
+                      src={del}
+                      alt="edit icon"
+                      onClick={() => handleDeleteContact(contactMenu!)}
+                    />
+                  </div>
+                </li>
+              </div>
+            );
+          })}
+        </ul>
+      </div>
+
+      {
+        /*SideForm */
+        sideBar ? (
+          <SideForm
+            onClick={handleSaveBtn}
+            backClick={() => setSideBar(false)}
+            contact={contactToEdit}
+          />
+        ) : (
+          <PlusBtn onClick={() => setSideBar(true)} />
+        )
+      }
+    </div>
   );
 }
