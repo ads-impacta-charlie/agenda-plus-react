@@ -19,7 +19,6 @@ export default function AppHeader() {
         <Image src={logo} alt="logo" className={styles.logo} />
         <p className={styles.logoFont}>Agenda Plus</p>
       </div>
-      {/*<input type="text" className={styles.search} placeholder="Buscar" />*/}
       <div className={styles.iconsContainer}>
         <div>
           <a href="#">
