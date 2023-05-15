@@ -22,7 +22,7 @@ const Form: React.FC<props> = ({
   btn,
   register,
   onFail,
-  errorMessage
+  errorMessage,
 }) => {
   return (
     <div className={styles.box}>
@@ -49,13 +49,13 @@ const Form: React.FC<props> = ({
             placeholder="Senha"
             onChange={(e) => setPassword(e.target.value)}
           ></input>
-          {
-            onFail ? (
-              <p style={{ color: "#990000", WebkitTextStrokeColor: "white" }}>{errorMessage}</p>
-            ) : (
-              <></>
-            )
-          }
+          {onFail ? (
+            <p style={{ color: "#990000", WebkitTextStrokeColor: "white" }}>
+              {errorMessage}
+            </p>
+          ) : (
+            <></>
+          )}
           <button
             className={`${styles.input} ${styles.btn}`}
             type="submit"

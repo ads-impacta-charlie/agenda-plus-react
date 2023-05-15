@@ -1,6 +1,9 @@
 import { getUserToken } from "@/services/authService";
 
-export const fetcher = async (url: string, options: RequestInit = {}): Promise<any> => {
+export const fetcher = async (
+  url: string,
+  options: RequestInit = {},
+): Promise<any> => {
   const token = await getUserToken();
   const headers = new Headers();
   headers.set("content-type", "application/json");
@@ -12,10 +15,10 @@ export const fetcher = async (url: string, options: RequestInit = {}): Promise<a
     headers,
   }).then((res) => {
     if (res.status === 401) {
-      return
+      return;
     } else if (res.status !== 204) {
-      return res.json()
+      return res.json();
     }
-    return res
+    return res;
   });
 };

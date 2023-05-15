@@ -30,7 +30,6 @@ export default function CreateContactForm({
 
   const handleAddDataClick = () => {
     setData((data) => {
-      console.log("estou tentando salvar");
       return [...data, { uuid: v4() }];
     });
   };

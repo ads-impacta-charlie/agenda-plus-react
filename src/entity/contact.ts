@@ -1,8 +1,8 @@
 import { ContactData } from "@/entity/contact-data";
 
 export interface Contact {
-  uuid?: string
-  name: string
-  avatarUrl?: string
-  data: ContactData[]
+  uuid?: string;
+  name: string;
+  avatarUrl?: string;
+  data: ContactData[];
 }

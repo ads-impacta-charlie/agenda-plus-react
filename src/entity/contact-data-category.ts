@@ -1,6 +1,6 @@
 const ContactDataCategory: { [key: string]: string } = {
-  PERSONAL: 'PESSOAL',
-  BUSINESS: 'TRABALHO',
-}
+  PERSONAL: "PESSOAL",
+  BUSINESS: "TRABALHO",
+};
 
-export default ContactDataCategory
+export default ContactDataCategory;

@@ -22,13 +22,21 @@ import ContactCategoryIcon from "@/components/Contact/ContactData/contact-catego
 import ContactDataValue from "@/components/Contact/ContactData/contact-data-value";
 import { fetcher } from "@/services/fetcher";
 
+interface ContactListProps {
+  searchTerm: string;
+}
+
 // @ts-ignore
-export default function ContactList() {
+export default function ContactList({ searchTerm }: ContactListProps) {
   const { data, mutate } = useSWR<Contact[]>(
     "http://localhost:8080/contact",
     fetcher
   );
-  const contacts = data || [];
+
+  const contacts =
+    searchTerm.length === 0
+      ? data || []
+      : data.filter((c) => c.name.includes(searchTerm));
   const [contactToEdit, setContactToEdit] = useState<Contact>();
   const [contactMenu, setContactMenu] = useState<Contact>();
   const [actionMenuAnchorEl, setActionMenuAnchorEl] =
