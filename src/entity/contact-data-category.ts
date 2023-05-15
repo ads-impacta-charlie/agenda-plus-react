@@ -3,4 +3,4 @@ const ContactDataCategory: { [key: string]: string } = {
   BUSINESS: 'Trabalho',
 }
 
-export default ContactDataCategory
+export default ContactDataCategory;

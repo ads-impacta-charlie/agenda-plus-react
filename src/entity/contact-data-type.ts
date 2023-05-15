@@ -3,4 +3,4 @@ const ContactDataType: { [key: string]: string } = {
   'EMAIL': "Email",
 }
 
-export default ContactDataType
+export default ContactDataType;

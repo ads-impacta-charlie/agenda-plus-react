@@ -1,7 +1,7 @@
 import { AppProps } from "next/app";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { auth } from "@/lib/firebaseConfig";
-import { User } from 'firebase/auth';
+import { User } from "firebase/auth";
 
 import "./index.css";
 

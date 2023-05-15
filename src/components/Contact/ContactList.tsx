@@ -17,17 +17,24 @@ import edit from "@/Assets/editar.svg";
 import del from "@/Assets/lixeira.svg";
 import userIcon from "@/Assets/userIcon2.svg";
 
-export default function ContactList() {
-  //states
+interface ContactListProps {
+  searchTerm: string;
+}
+
+// @ts-ignore
+export default function ContactList({ searchTerm }: ContactListProps) {
   const { data, mutate } = useSWR<Contact[]>(
     "http://localhost:8080/contact",
     fetcher
   );
+
+  const contacts =
+    searchTerm.length === 0
+      ? data || []
+      : data.filter((c) => c.name.includes(searchTerm));
   const [contactToEdit, setContactToEdit] = useState<Contact>();
   const [contactMenu, setContactMenu] = useState<Contact>();
   const [sideBar, setSideBar] = useState(false);
-
-  const contacts = data || [];
 
   const handleEventHover = (event: any, contact: Contact) => {
     console.log(contact);

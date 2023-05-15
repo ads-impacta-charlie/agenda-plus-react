@@ -26,15 +26,6 @@
   font-size: 26px;
   color: #fff;
 }
-.search {
-  position: absolute;
-  width: 50vw;
-  border-radius: 10px;
-  height: 35px;
-  text-align: center;
-  font-size: 16px;
-  margin: 25%;
-}
 
 .iconsContainer {
   display: flex;
