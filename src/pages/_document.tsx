@@ -1,5 +1,4 @@
 "use client";
-import { AuthContextProvider } from "@/context/AuthContext";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
 interface props {
@@ -9,12 +8,17 @@ interface props {
 export default function RootLayout({ children }: props) {
   return (
     <Html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
       <Head>
-        <link rel="shortcut icon" href="@/Assets/Logo.svg" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Bungee&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <body>
         <Main />

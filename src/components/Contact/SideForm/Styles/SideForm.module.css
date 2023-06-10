@@ -1,17 +1,19 @@
 .container {
   display: flex;
   flex-direction: column;
-  background-color: rgba(208, 180, 159, 0.5);
+  background-color: var(--sideNav);
   width: 20vw;
   height: 93.5vh;
   align-items: center;
   outline: none;
   border-radius: 10px 0px 0px 10px;
 }
+
 .backContainer {
   margin-left: 5%;
   width: 100%;
 }
+
 .backspace {
   margin-top: 5px;
   width: 40px;
@@ -26,6 +28,7 @@
   margin-bottom: 10%;
   text-align: center;
 }
+
 .containerAdd {
   width: 80%;
   height: 50px;
@@ -34,12 +37,14 @@
   justify-content: space-around;
   align-items: center;
 }
+
 .typeDropDown {
   width: 80%;
   height: 30px;
   font-size: 16px;
   text-align: center;
 }
+
 .dataForm {
   height: 30vh;
   overflow-y: auto;

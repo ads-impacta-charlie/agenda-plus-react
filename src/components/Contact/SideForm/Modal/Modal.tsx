@@ -44,7 +44,7 @@ export default function Modal({ onChange, src }: props) {
         />
       )}
 
-      {visible ? (
+      {visible && (
         <>
           <div className={styles.container} onClick={() => setVisible(false)} />
           <div className={styles.modal} style={{ opacity: "none" }}>
@@ -60,8 +60,6 @@ export default function Modal({ onChange, src }: props) {
             />
           </div>
         </>
-      ) : (
-        <></>
       )}
     </>
   );

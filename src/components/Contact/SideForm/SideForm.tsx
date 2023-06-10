@@ -6,7 +6,6 @@ import DataForm from "./DataForm/DataForm";
 //Entities
 import { Contact } from "@/entity/contact";
 import { ContactData } from "@/entity/contact-data";
-import ContactDataCategory from "@/entity/contact-data-category";
 import ContactDataType from "@/entity/contact-data-type";
 
 import { fetcher } from "@/services/fetcher";
@@ -15,7 +14,6 @@ import { v4 } from "uuid";
 //Assets
 import styles from "./Styles/SideForm.module.css";
 import back from "@/Assets/backspace.svg";
-import userIcon from "@/Assets/userIcon2.svg";
 
 interface formProps {
   onClick: (contact: Contact) => void;
@@ -25,15 +23,13 @@ interface formProps {
 
 export default function SideForm({ backClick, onClick, contact }: formProps) {
   const [name, setName] = useState<string>(contact?.name || "");
-  const [avatarUrl, setAvatarUrl] = useState<string>(
-    contact?.avatarUrl || userIcon
-  );
+  const [avatarUrl, setAvatarUrl] = useState<string>(contact?.avatarUrl || "");
   const [type, setType] = useState("TELEPHONE");
   const [data, setData] = useState<ContactData[]>(contact?.data || []);
 
   useEffect(() => {
     setName(contact?.name || "");
-    setAvatarUrl(contact?.name || "");
+    setAvatarUrl(contact?.avatarUrl || "");
     setData(contact?.data || []);
   }, [contact]);
 
@@ -102,6 +98,7 @@ export default function SideForm({ backClick, onClick, contact }: formProps) {
         <input
           type="text"
           placeholder="Nome"
+          value={contact?.name}
           onChange={(e) => setName(e.target.value)}
         ></input>
 

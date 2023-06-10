@@ -1,34 +1,46 @@
 /*Containergeral*/
 .containerWithoutForm {
   display: grid;
-  grid-template-columns: 14vw 85vw;
-  width: 99vw;
+  grid-template-columns: 15vw 85vw;
   height: 93.5vh;
   box-sizing: border-box;
+  background-color: var(--bodyBg);
+  color: var(--text-primary);
 }
+
 .containerWithForm {
   display: grid;
-  grid-template-columns: 80vw 19vw;
+  grid-template-columns: 80vw 20vw;
+  background-color: var(--bodyBg);
+  color: var(--text-primary);
 }
 
 .sideBar {
-  background-color: rgba(208, 180, 159, 0.35);
+  background-color: var(--sideNav);
+  display: flex;
+  flex-direction: column;
   text-align: center;
-}
-.sidebar ul {
-  border-bottom: 1px solid rgba(100, 100, 100, 0.5);
-}
-.sideBar li {
-  font-size: 13px;
-  font-weight: 500;
-  margin: 10px 0;
-  margin-right: 10px;
-  padding: 10px 0;
-  cursor: pointer;
 }
 
 .noSideBar {
   display: none;
+}
+
+.sidebar ul {
+  display: inline-block;
+  list-style-position: inside;
+  border-bottom: 1px solid rgba(100, 100, 100, 0.5);
+}
+
+.sideBar li {
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 10px auto;
+}
+
+.sidebar li:hover {
+  background-color: aqua;
 }
 
 /*Body*/
@@ -36,20 +48,24 @@
   font-size: 16px;
   font-weight: 600;
 }
+
 .avatarContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   grid-area: "avatar";
 }
+
 .imageIcon {
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
+
 .contactName {
   grid-area: "name";
 }
+
 .containerValues {
   display: flex;
   flex-direction: row;
@@ -57,31 +73,26 @@
   width: 100%;
   border: none;
 }
+
 .containerValues div {
   display: flex;
   justify-content: center;
   margin: 5px;
 }
+
 .containerValues div p {
   margin-left: 5px;
 }
+
 .wrapper li {
   display: grid;
   grid-template-areas:
-    "avatar name value category icon"
-    "avatar name value category icon"
-    "avatar name value category icon"
-    "avatar name value category icon"
-    "avatar name value category icon"
-    "avatar name value category icon"
-    "avatar name value category icon"
-    "avatar name value category icon"
-    "avatar name value category icon"
     "avatar name value category icon";
-  grid-template-columns: min(5%, 200px) 25% 50% 10% auto;
-  margin: 0 1vw;
+  grid-template-columns: clamp(50px, 100px, 200px) 25% clamp(200px, 50%, 350px) clamp(200px, 10%, 300px) 1fr;
+  margin: 0 15px;
   border-bottom: 2px solid rgb(175, 175, 175);
 }
+
 .wrapper li div {
   display: flex;
   align-items: center;
@@ -93,8 +104,10 @@
   background-color: rgba(100, 100, 100, 0.2);
 }
 
-.iconContainer {
+.iconsSection {
   grid-area: "icon";
+  display: "flex";
+  justify-content: "center";
 }
 
 /*addButon*/
@@ -106,14 +119,15 @@
   height: 50px;
   border-radius: 50%;
   font-size: 25px;
-  background-color: #493134;
-  color: rgba(237, 216, 178, 0.8);
+  background-color: var(--addBtnBg);
+  color: var(--addbtn);
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   border: none;
 }
+
 .bar1 {
   height: 5px;
   width: 25px;
@@ -121,14 +135,15 @@
   top: 0;
   margin: 0 auto;
   transform: rotate(90deg);
-  background-color: rgba(237, 216, 178);
+  background-color: var(--addBtn);
   border: none;
 }
+
 .bar2 {
   position: absolute;
   width: 25px;
   height: 5px;
-  background-color: rgba(237, 216, 178);
+  background-color: var(--addBtn);
   margin: 0 auto;
   border: none;
 }

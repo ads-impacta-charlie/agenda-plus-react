@@ -27,12 +27,14 @@ export default function Login() {
   };
 
   return (
-    <Form
-      handleSubmitProp={handleSubmit}
-      setEmail={setEmail}
-      setPassword={setPassword}
-      btn={"Login"}
-      register={false}
-    />
+    <>
+      <Form
+        handleSubmitProp={handleSubmit}
+        setEmail={setEmail}
+        setPassword={setPassword}
+        btn={"Login"}
+        register={false}
+      />
+    </>
   );
 }
