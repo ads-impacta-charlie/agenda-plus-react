@@ -20,6 +20,9 @@ export default function DataForm({
   dataIndex,
   onDelete,
 }: props) {
+  const [inputValue, setInputValue] = useState("");
+  const [isValid, setIsValid] = useState(true);
+
   const handleChangeCategory = (category: string) => {
     onChange({ ...data, category }, dataIndex);
   };
@@ -41,7 +44,7 @@ export default function DataForm({
         onChange={(e) => handleChangeCategory(e.target.value)}
         required
       >
-        <option selected={true} disabled={true} value={""} hidden></option>
+        <option disabled={true} hidden></option>
         {Object.keys(ContactDataCategory).map((category) => {
           return (
             <option key={category} value={category}>
@@ -54,12 +57,13 @@ export default function DataForm({
       <input
         type="text"
         placeholder="Valor"
+        value={data?.value}
         onChange={(e) => handleChangeValue(e.target.value)}
         required
       ></input>
       <Image
         src={del}
-        alt="edit icon"
+        alt="Delete icon"
         onClick={() => handleDeleteContactData()}
       />
     </div>

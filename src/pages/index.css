@@ -1,17 +1,47 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+ @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 
-html,
-body {
-  height: 100vh;
-}
+ * {
 
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
-  overflow: hidden;
-  /* outline: 1px dashed red; */
-}
+   /* outline: 1px dashed red; */
+ }
+
+ body {
+   font-family: "Roboto", sans-serif;
+   margin: 0;
+   padding: 0;
+   height: 100vh;
+   box-sizing: border-box;
+   overflow: hidden;
+ }
+
+ li {
+   list-style: none;
+ }
+
+ :root {
+   --navBackground: #5d3b32;
+   --logoText: #e5e5e5;
+
+   --text-primary: black;
+   --text-secondary: #f5f5f5;
+
+   --sideNav: rgba(208, 180, 159, 0.35);
+   --bodyBg: white;
+
+   --addBtnBg: #493134;
+   --addBtn: rgba(237, 216, 178, 0.8);
+ }
+
+ [data-theme='dark'] {
+   --navBackground: rgb(25, 25, 25);
+   --logoText: #e5e5e5;
+
+   --text-primary: #f5f5f5;
+   --text-secondary: grey;
+
+   --sideNav: rgba(87, 77, 66, 0.35);
+   --bodyBg: #2d2d2d;
+
+   --addBtnBg: rgba(237, 216, 178);
+   --addBtn: #493134;
+ }
