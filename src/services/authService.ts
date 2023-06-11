@@ -1,3 +1,5 @@
+"use client";
+
 import { auth } from "@/lib/firebaseConfig";
 import router from "next/router";
 import {
@@ -44,9 +46,16 @@ export const signOutUser = async () => {
 
 export const checkUserLoggedIn = () => {
   auth.onAuthStateChanged((user) => {
-    if (user != null) {
-      router.push("/Home");
-    } else {
+    if (user === null) {
+      router.push("/Login");
+    }
+    else
+    {
+      getUserToken();
+      if(router.pathname === "/Login")
+      {
+        router.push("/Home")
+      }
     }
   });
 };
@@ -54,10 +63,10 @@ export const checkUserLoggedIn = () => {
 export const getUserToken = async () => {
   const user = auth.currentUser;
   if (user) {
-    const token = await user.getIdToken();
-    return token;
+    user.getIdToken().then((token) => {
+      localStorage.setItem("firebaseToken", token);
+    })
   }
-  return null;
 };
 
 export const onAuthStateChange = (callback: (user: any) => void) => {
