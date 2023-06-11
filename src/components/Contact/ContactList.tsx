@@ -6,6 +6,7 @@ import Image from "next/image";
 import sideBarItens from "@/entity/side-bar-itens";
 import { Contact } from "@/entity/contact";
 import { fetcher } from "@/services/fetcher";
+import { signOutUser } from "@/services/authService";
 
 import SideForm from "./SideForm/SideForm";
 import PlusBtn from "./PlusBtn/PlusBtn";
@@ -16,12 +17,13 @@ import styles from "./Styles/Contact.module.css";
 import edit from "@/Assets/editar.svg";
 import del from "@/Assets/lixeira.svg";
 import userIcon from "@/Assets/userIcon2.svg";
+import fav1 from "@/Assets/favorite black.svg";
+import fav2 from "@/Assets/star yellow.svg";
 
 interface ContactListProps {
   searchTerm: string;
 }
 
-// @ts-ignore
 export default function ContactList({ searchTerm }: ContactListProps) {
   const { data, mutate } = useSWR<Contact[]>(
     "http://localhost:8080/contact",
@@ -36,20 +38,22 @@ export default function ContactList({ searchTerm }: ContactListProps) {
   const [contactMenu, setContactMenu] = useState<Contact>();
   const [sideBar, setSideBar] = useState(false);
 
+  const handleLogout = () => {
+    signOutUser();
+  };
+
   const handleEventHover = (event: any, contact: Contact) => {
-    console.log(contact);
     setContactMenu(contact);
   };
 
   const handleEditContact = (contact: Contact) => {
     setSideBar(true);
-    console.log(contact);
     setContactToEdit(contact);
   };
 
   const handleDeleteContact = async (contact: Contact) => {
     if (!contact || !contact.uuid) {
-      return console.log("não acho");
+      return;
     }
 
     const headers = new Headers();
@@ -65,8 +69,24 @@ export default function ContactList({ searchTerm }: ContactListProps) {
     return mutate(contacts.filter((c) => c.uuid !== contact.uuid));
   };
 
-  //joga pro banco
+  const handleFavContact = async (contact: Contact) => {
+    const headers = new Headers();
+    headers.set("content-type", "application/json");
+    let favorite = contact.favorite ? false : true;
+
+    const url = `http://localhost:8080/contact/${contact.uuid}/favorite?favorite=${favorite}`;
+
+    await fetcher(url, {
+      method: "PUT",
+      cache: "no-cache",
+      mode: "cors",
+    });
+
+    return mutate([...contacts]);
+  };
+
   const handleSaveBtn = async (contact: Contact) => {
+    setSideBar(false);
     setContactToEdit(undefined);
     return mutate([...contacts, contact]);
   };
@@ -84,6 +104,11 @@ export default function ContactList({ searchTerm }: ContactListProps) {
             return <li key={item}>{item}</li>;
           })}
         </ul>
+
+        <button onClick={handleLogout} className={styles.avatar}>
+          {" "}
+          Logout
+        </button>
       </div>
 
       {/*Listagem */}
@@ -102,7 +127,6 @@ export default function ContactList({ searchTerm }: ContactListProps) {
                   onMouseEnter={(e) => handleEventHover(e, contact)}
                   className={styles.listAllContacts}
                 >
-                  {/*1 */}
                   <div className={styles.avatarContainer}>
                     <div>
                       {contact.avatarUrl ? (
@@ -121,10 +145,8 @@ export default function ContactList({ searchTerm }: ContactListProps) {
                     </div>
                   </div>
 
-                  {/*2*/}
                   <div className={styles.contactName}>{contact.name}</div>
 
-                  {/*3*/}
                   <div className={styles.containerValues}>
                     {contact.data.map((contactData) => {
                       return (
@@ -151,22 +173,24 @@ export default function ContactList({ searchTerm }: ContactListProps) {
                       );
                     })}
                   </div>
-                  <div
-                    style={{
-                      gridArea: "icon",
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                  >
+                  <div className={styles.iconsSection}>
                     <Image
+                      style={{ margin: "auto 10px" }}
                       src={edit}
                       alt="edit icon"
-                      onClick={() => handleEditContact(contactMenu!)}
+                      onClick={() => handleEditContact(contact)}
                     />
                     <Image
+                      style={{ margin: "auto 10px" }}
                       src={del}
-                      alt="edit icon"
-                      onClick={() => handleDeleteContact(contactMenu!)}
+                      alt="Delete icon"
+                      onClick={() => handleDeleteContact(contact)}
+                    />
+                    <Image
+                      style={{ margin: "auto 10px" }}
+                      src={contact?.favorite ? fav2 : fav1}
+                      alt="Favorite icon"
+                      onClick={() => handleFavContact(contact)}
                     />
                   </div>
                 </li>

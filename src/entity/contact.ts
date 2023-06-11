@@ -4,5 +4,6 @@ export interface Contact {
   uuid?: string;
   name: string;
   avatarUrl?: string;
+  favorite?: boolean;
   data: ContactData[];
 }
