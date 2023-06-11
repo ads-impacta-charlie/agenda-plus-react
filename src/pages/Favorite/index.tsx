@@ -34,7 +34,7 @@ export default function Home() {
           handleSwitch={handleSwitch}
           theme={theme}
         />
-        <ContactList searchTerm={searchTerm} fav={false} />
+        <ContactList searchTerm={searchTerm} fav={true} />
       </div>
     </>
   );
