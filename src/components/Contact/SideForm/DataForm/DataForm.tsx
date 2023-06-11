@@ -44,7 +44,7 @@ export default function DataForm({
         onChange={(e) => handleChangeCategory(e.target.value)}
         required
       >
-        <option disabled={true} hidden></option>
+        <option selected={true} disabled={true} hidden></option>
         {Object.keys(ContactDataCategory).map((category) => {
           return (
             <option key={category} value={category}>

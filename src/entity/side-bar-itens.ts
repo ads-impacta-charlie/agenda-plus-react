@@ -1,7 +1,8 @@
 const sideBarItens = {
     "menu1":{
-        "contatos":"Contatos",
-        "favoritos":"Favoritos"
+        "Home":"Contatos",
+        "Favorite":"Favorite",
+        "Import": "Importar contatos"
     }
 }
 

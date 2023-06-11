@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import useSWR from "swr";
-import React, { useState } from "react";
+import React, { ChangeEvent, HtmlHTMLAttributes, useState } from "react";
 import Image from "next/image";
 
 import sideBarItens from "@/entity/side-bar-itens";
@@ -22,21 +22,25 @@ import fav2 from "@/Assets/star yellow.svg";
 
 interface ContactListProps {
   searchTerm: string;
+  fav?: boolean;
 }
 
-export default function ContactList({ searchTerm }: ContactListProps) {
+export default function ContactList({ searchTerm, fav }: ContactListProps) {
   const { data, mutate } = useSWR<Contact[]>(
     "http://localhost:8080/contact",
     fetcher
   );
 
-  const contacts =
-    searchTerm.length === 0
-      ? data || []
-      : data.filter((c) => c.name.includes(searchTerm));
+  const contacts = fav
+    ? data.filter((c) => c.favorite === true)
+    : searchTerm.length === 0
+    ? data || []
+    : data.filter((c) => c.name.includes(searchTerm));
+
   const [contactToEdit, setContactToEdit] = useState<Contact>();
   const [contactMenu, setContactMenu] = useState<Contact>();
   const [sideBar, setSideBar] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleLogout = () => {
     signOutUser();
@@ -100,11 +104,9 @@ export default function ContactList({ searchTerm }: ContactListProps) {
       {/*Sidebar */}
       <div className={!sideBar ? styles.sideBar : styles.noSideBar}>
         <ul>
-          {Object.keys(sideBarItens.menu1).map((item) => {
-            return <li key={item}>{item}</li>;
-          })}
+          <li>Contatos</li>
+          <li>Favoritos</li>
         </ul>
-
         <button onClick={handleLogout} className={styles.avatar}>
           {" "}
           Logout
